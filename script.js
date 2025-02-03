@@ -1,4 +1,4 @@
-const API_KEY = '';
+const API_KEY = '86c938e89f194213ef182bd1a64fcf63';
 
 const form = document.getElementById("form");
 const searchBtn = document.getElementById("search-button");
@@ -8,7 +8,7 @@ form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     try {
-        const city = document.getElementById("input").value.toLowerCase();
+        const city = document.getElementById("input").value.toLowerCase().trim();
         
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
 
@@ -29,8 +29,8 @@ function displayData(data) {
     const weatherHtml = `
         <div class="weather-card">
             <h2>${data.name}, ${data.sys.country}</h2>
-            <div class="temp">${Math.round(data.main.temp)}°C</div>
-            <div class="description">${data.weather[0].description}</div>
+            <div class="temp">Temp: ${Math.round(data.main.temp)}°C</div>
+            <div class="description">Weather: ${data.weather[0].description}</div>
             <div class="details">
                 <p>Humidity: ${data.main.humidity}%</p>
                 <p>Wind Speed: ${data.wind.speed} m/s</p>
@@ -39,4 +39,5 @@ function displayData(data) {
     `;
     
     card.innerHTML = weatherHtml;
+    card.style.display = "block";
 }
